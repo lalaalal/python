@@ -24,8 +24,7 @@ for i in range(5):
     for n in range(len(article)):
         fname = article[n].get('title')
         img_src = article[n].get('src')
-
-    print(fname)
+        print(fname)
 
     res = requests.get(img_src)
     
