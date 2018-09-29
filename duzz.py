@@ -9,4 +9,8 @@ html = bs4.BeautifulSoup(res.text, 'html.parser')
 img = html.select('div > img')[1]
 
 n = str(img).count('/>')
-print(str(img).replace('/>', '>', n))
+img = str(img).replace('/>', '>', n)
+img = img.replace('</img></img></img>', '', 1)
+
+tag = bs4.BeautifulSoup(img, 'html.parser')
+print(tag.select('img')[0].get('src'))
