@@ -3,7 +3,7 @@ import bs4
 import os
 
 def dl_file(res, fname, ftype):
-    file = open(fname + ftype, "wb")
+    file = open(fname + "." + ftype, "wb")
     for bundle in res.iter_content(100000):
         file.write(bundle)
 
@@ -53,7 +53,7 @@ while next_url != page_url:
         img_url = wasabi_domain + img[nth_img].get('data-src')
         img_res = requests.get(img_url, headers = wasabi_headers)
         fname = str(nth_img + 1).zfill(len(str(len(img))))
-        dl_file(img_res, fname, ftype = '.jpg')
+        dl_file(img_res, fname, ftype = 'jpg')
 
         if nth_img is 0:
             n_dot = 0
