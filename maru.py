@@ -40,7 +40,7 @@ while next_url != page_url:
 
     title = episode_html.select('.title-subject')[0].text
     no = episode_html.select('.title-no')[0].text
-    no = no.zfill(4)
+    no = no.zfill(len(str(no)) + 1)
 
     mkdir(title)
     os.chdir('./' + title)
@@ -52,7 +52,7 @@ while next_url != page_url:
     for nth_img in range(len(img)):
         img_url = wasabi_domain + img[nth_img].get('data-src')
         img_res = requests.get(img_url, headers = wasabi_headers)
-        fname = str(nth_img + 1).zfill(2)
+        fname = str(nth_img + 1).zfill(len(str(len(img))))
         dl_file(img_res, fname, ftype = '.jpg')
 
         if nth_img is 0:
