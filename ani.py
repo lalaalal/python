@@ -1,6 +1,7 @@
 import requests
 import bs4
 import os
+import re
 
 def dl_file(res, fname, ftype):
     file = open(fname + "." + ftype, "wb")
@@ -36,6 +37,7 @@ html = bs4.BeautifulSoup(res.text, "html.parser")
 
 page_list = html.select('.list_name > a')
 title = html.select('h1')[0].text
+re.sub('[<>/\\\\*:"]', ' ', title)
 print(title)
 
 info = html.select(".ani_info_right_box > div > span")

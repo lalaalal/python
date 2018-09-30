@@ -1,6 +1,7 @@
 import requests
 import bs4
 import os
+import re
 
 def dl_file(res, fname, ftype):
     file = open(fname + "." + ftype, "wb")
@@ -43,6 +44,7 @@ while next_url != page_url:
     episode_html = bs4.BeautifulSoup(episode.text, "html.parser")
 
     title = episode_html.select('.title-subject')[0].text
+    title = re.sub('[<>/\\\\*:"]', ' ', title)
     no = episode_html.select('.title-no')[0].text
     no = no.zfill(len(digit) + 1)
 
