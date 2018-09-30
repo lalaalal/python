@@ -16,19 +16,46 @@ def mkdir(dname):
             print("Failed to create directory!!!!!")
             raise
 
+path = input('Input Path (Default = C:/Temp) : ')
+if path is "":
+    path = "C:/Temp"
+
+list_url = input('Input url (Default = https://ani24joa.com/ani_list/109.html) : ')
+if list_url is "":
+    list_url = "https://ani24joa.com/ani_list/109.html"
+
+digit = input('Last Episode (Default = 999) : ')
+if digit is "":
+    digit = "999"
+
+os.chdir(path)
+
 url_head = "http://vxzgfwfsafg.site/video0/id_"
 url_tail = ".ewqta"
 
-url = "https://ani24joa.com/ani_view/1872.html"
+list_url = "https://ani24joa.com/ani_list/109.html"
 
-res = requests.get(url)
-video_num = url[url.rfind('/') + 1:url.find('.html')]
-dl_url = url_head + video_num + url_tail
-print(dl_url)
+res = requests.get(list_url)
+html = bs4.BeautifulSoup(res.text, "html.parser")
 
-video = requests.get(dl_url)
-print(video)
+page_list = html.select('.list_name > a')
+title = html.select('h1')[0].text
+print(title)
 
-os.chdir("/home/lalaalal/Downloads")
+mkdir(title)
+os.chdir(title)
+for i in range(len(page_list)):
 
-dl_file(video, fname = "umr", ftype = ".mp4")
+    page_url = page_list[11 - i].get("href")
+    no = str(i + 1).zfill(len(digit)) + "화"
+    print(no, end = " . . . ",flush = True)
+
+    video_num = page_url[page_url.rfind('/') + 1:page_url.find('.html')]
+    dl_url = url_head + video_num + url_tail
+
+    video = requests.get(dl_url)
+    print(video)
+
+    fname = title + " " + no
+
+    dl_file(video, fname, ftype = "mp4")
