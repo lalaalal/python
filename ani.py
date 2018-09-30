@@ -45,7 +45,7 @@ os.chdir(title)
 for i in range(len(page_list)):
     page_url = page_list[len(page_list) - 1 - i].get("href")
     no = page_list[len(page_list) - 1 - i].text.replace(title, '');
-    no = no.replace(" ", "").zfill(len(str(len(page_list))))
+    no = no.replace(" ", "").zfill(len(str(len(page_list))) + 1)
     video_num = page_url[page_url.rfind('/') + 1:page_url.find('.html')]
 
     for j in range(len(url_head)):
