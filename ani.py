@@ -40,16 +40,12 @@ title = html.select('h1')[0].text
 re.sub('[<>/\\\\*:"]', ' ', title)
 print(title)
 
-info = html.select(".ani_info_right_box > div > span")
-
-n_epi = len(page_list)
-
 mkdir(title)
 os.chdir(title)
-for i in range(n_epi):
-
-    page_url = page_list[n_epi - 1 - i].get("href")
-    no = str(i + 1).zfill(len(str(n_epi))) + "화"
+for i in range(len(page_list)):
+    page_url = page_list[len(page_list) - 1 - i].get("href")
+    no = page_list[len(page_list) - 1 - i].text.replace(title, '');
+    no = no.replace(" ", "").zfill(len(str(len(page_list))))
     video_num = page_url[page_url.rfind('/') + 1:page_url.find('.html')]
 
     for j in range(len(url_head)):
