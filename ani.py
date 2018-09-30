@@ -31,4 +31,4 @@ print(video)
 
 os.chdir("/home/lalaalal/Downloads")
 
-dl_filr(video, fname = "umr", ftype = ".mp4")
+dl_file(video, fname = "umr", ftype = ".mp4")
