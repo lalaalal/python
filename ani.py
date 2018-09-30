@@ -16,9 +16,9 @@ def mkdir(dname):
             print("Failed to create directory!!!!!")
             raise
 
-path = input('Input Path (Default = C:/Temp) : ')
+path = input('Input Path (Default = /home/lalaalal/Downloads) : ')
 if path is "":
-    path = "C:/Temp"
+    path = "/home/lalaalal/Downloads"
 
 list_url = input('Input url (Default = https://ani24joa.com/ani_list/109.html) : ')
 if list_url is "":
@@ -33,7 +33,8 @@ os.chdir(path)
 url_head = "http://vxzgfwfsafg.site/video0/id_"
 url_tail = ".ewqta"
 
-list_url = "https://ani24joa.com/ani_list/109.html"
+new_url_head = "http://cbhegds.online/new/id_"
+new_url_tail = ".png"
 
 res = requests.get(list_url)
 html = bs4.BeautifulSoup(res.text, "html.parser")
@@ -55,6 +56,16 @@ for i in range(len(page_list)):
 
     video = requests.get(dl_url)
     print(video)
+    print("From " + dl_url)
+
+    if video.status_code == 404:
+        print(no, end = " . . . ",flush = True)
+        dl_url = new_url_head + video_num + new_url_tail
+
+        video = requests.get(dl_url)
+        print(video)
+        print("From " + dl_url)
+
 
     fname = title + " " + no
 
