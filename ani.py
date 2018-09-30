@@ -28,8 +28,8 @@ os.chdir(path)
 
 #headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.100 Safari/537.36'}
 
-url_head = ["http://aaazxvhrgwed.aaazxvhrgwed.life/video0/id_", "http://vxzgfwfsafg.site/video0/id_", "http://cbhegds.online/new/id_"]
-url_tail = [".dsgewy", ".ewqta", ".png"]
+url_head = ["http://vxzgfwfsafg.site/video0/id_", "http://aaazxvhrgwed.aaazxvhrgwed.life/video0/id_", "http://cbhegds.online/new/id_"]
+url_tail = [".ewqta", ".dsgewy", ".png"]
 
 res = requests.get(list_url)
 html = bs4.BeautifulSoup(res.text, "html.parser")
