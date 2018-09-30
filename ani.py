@@ -24,17 +24,12 @@ list_url = input('Input url (Default = https://ani24joa.com/ani_list/109.html) :
 if list_url is "":
     list_url = "https://ani24joa.com/ani_list/109.html"
 
-digit = input('Last Episode (Default = 999) : ')
-if digit is "":
-    digit = "999"
-
 os.chdir(path)
 
-url_head = "http://vxzgfwfsafg.site/video0/id_"
-url_tail = ".ewqta"
+#headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.100 Safari/537.36'}
 
-new_url_head = "http://cbhegds.online/new/id_"
-new_url_tail = ".png"
+url_head = ["http://aaazxvhrgwed.aaazxvhrgwed.life/video0/id_", "http://vxzgfwfsafg.site/video0/id_", "http://cbhegds.online/new/id_"]
+url_tail = [".dsgewy", ".ewqta", ".png"]
 
 res = requests.get(list_url)
 html = bs4.BeautifulSoup(res.text, "html.parser")
@@ -43,29 +38,28 @@ page_list = html.select('.list_name > a')
 title = html.select('h1')[0].text
 print(title)
 
+info = html.select(".ani_info_right_box > div > span")
+
+n_epi = len(page_list)
+
 mkdir(title)
 os.chdir(title)
-for i in range(len(page_list)):
+for i in range(n_epi):
 
-    page_url = page_list[11 - i].get("href")
-    no = str(i + 1).zfill(len(digit)) + "화"
-    print(no, end = " . . . ",flush = True)
-
+    page_url = page_list[n_epi - 1 - i].get("href")
+    no = str(i + 1).zfill(len(str(n_epi))) + "화"
     video_num = page_url[page_url.rfind('/') + 1:page_url.find('.html')]
-    dl_url = url_head + video_num + url_tail
 
-    video = requests.get(dl_url)
-    print(video)
-    print("From " + dl_url)
+    for j in range(len(url_head)):
+        dl_url = url_head[j] + video_num + url_tail[j]
 
-    if video.status_code == 404:
+        print(dl_url)
         print(no, end = " . . . ",flush = True)
-        dl_url = new_url_head + video_num + new_url_tail
 
         video = requests.get(dl_url)
         print(video)
-        print("From " + dl_url)
-
+        if video.status_code != 404:
+            break;
 
     fname = title + " " + no
 
