@@ -24,7 +24,9 @@ next_url = input('Input url (Default = http://wasabisyrup.com/archives/93) : ')
 if next_url is "":
     next_url = "http://wasabisyrup.com/archives/93"
 
-digit = input('Last Episode : ')
+digit = input('Last Episode (Default = 999) : ')
+if digit is "":
+    digit = "999"
 
 wasabi_domain = "http://wasabisyrup.com"
 
