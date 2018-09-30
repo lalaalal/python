@@ -37,11 +37,11 @@ html = bs4.BeautifulSoup(res.text, "html.parser")
 
 page_list = html.select('.list_name > a')
 title = html.select('h1')[0].text
-re.sub('[<>/\\\\*:"]', ' ', title)
+title = re.sub('[<>/\\\\*:"]', ' ', title)
 print(title)
 
-mkdir(title)
-os.chdir(title)
+mkdir("[" + title + "]")
+os.chdir("[" + title + "]")
 for i in range(len(page_list)):
     page_url = page_list[len(page_list) - 1 - i].get("href")
     no = page_list[len(page_list) - 1 - i].text.replace(title, '');

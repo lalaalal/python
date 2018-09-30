@@ -48,11 +48,11 @@ while next_url != page_url:
     no = episode_html.select('.title-no')[0].text
     no = no.zfill(len(digit) + 1)
 
-    mkdir(title)
-    os.chdir('./' + title)
+    mkdir("[" + title + "]")
+    os.chdir("[" + title + "]")
 
     mkdir(no)
-    os.chdir('./' + no)
+    os.chdir(no)
     img = episode_html.select('.gallery-template > img')
     print(title + " " + no, end = ' ', flush = True)
     for nth_img in range(len(img)):
