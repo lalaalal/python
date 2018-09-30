@@ -24,6 +24,8 @@ next_url = input('Input url (Default = http://wasabisyrup.com/archives/93) : ')
 if next_url is "":
     next_url = "http://wasabisyrup.com/archives/93"
 
+digit = input('Last Episode : ')
+
 wasabi_domain = "http://wasabisyrup.com"
 
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.100 Safari/537.36', 'Referer' : 'http://wasabisyrup.com'}
@@ -40,7 +42,7 @@ while next_url != page_url:
 
     title = episode_html.select('.title-subject')[0].text
     no = episode_html.select('.title-no')[0].text
-    no = no.zfill(len(str(no)) + 1)
+    no = no.zfill(len(digit) + 1)
 
     mkdir(title)
     os.chdir('./' + title)
