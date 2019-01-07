@@ -44,27 +44,26 @@ for i in range(int(m), int(n) + 1):
 
     dl_file(res, "[%02d] "%i + title, ftype = "mp4")
 
-print("Checking OVA...")
-req_url = head + "OVA" + tail
-res = requests.get(req_url)
-if res.status_code == 200:
-    print("[OVA]" + title, end = ' ', flush = True)
-    dl_file(res, "[OVA] " + title, ftype = "mp4")
+print("\nChecking OVA...")
 
-i = 1
-print("[OVA %d] "%i + title, end = ' ', flush = True)
-req_url = head + "OVA%d"%i + tail
+print("[OVA]" + title, end = ' ', flush = True)
+req_url = head + "OVA" + tail
 res = requests.get(req_url)
 print(res.status_code)
 
-while res.status_code == 200:
-    print(res.status_code)
-    dl_file(res, "[OVA %d] "%i + title, ftype = "mp4")
+if res.status_code == 200:
+    dl_file(res, "[OVA] " + title, ftype = "mp4")
 
-    i += 1
-
+i = 1
+while True:
     print("[OVA %d] "%i + title, end = ' ', flush = True)
     req_url = head + "OVA%d"%i + tail
     res = requests.get(req_url)
+    print(res.status_code)
+
+    i += 1
+
+    if res.status_code != 200:
+        break
 
 print("\nDone!")
