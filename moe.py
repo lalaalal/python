@@ -1,7 +1,8 @@
 import requests
-import bs4
 import os
 import re
+
+FTYPE = "mp4"
 
 def dl_file(res, fname, ftype):
     file = open(fname + "." + ftype, "wb")
@@ -17,53 +18,68 @@ def mkdir(dname):
             print("Failed to create directory!!!!!")
             raise
 
-path = input("PATH: ")
-if path is "":
+path    = input("PATH   : ")
+title   = input("Title  : ")
+head    = input("Head   : ")
+tail    = input("Tail   : ")
+m       = input("First  : ")
+n       = input("Last   : ")
+more    = input("More   : ")
+option  = input("Option : ")
+
+if path == "":
     path = "/home/lalaalal/Videos"
 
-title = input("Title: ")
-head = input("Head: ")
-tail = input("Tail: ")
+if tail == "":
+    tail = ".moe"
 
 mkdir(path + '/' + title)
 os.chdir(path + '/' + title)
 
-m = input("First: ")
-n = input("Last : ")
-
+print("\n[Start Downloading]\n")
 for i in range(int(m), int(n) + 1):
-    req_url = head + "%02d"%i + tail
+    if option.find("z") == 0:
+        req_url = head + i + tail
+    else:
+        req_url = head + "%02d"%i + tail
+
     print("[%02d] "%i + title, end = ' ', flush = True)
     res = requests.get(req_url)
-    print(res.status_code)
+    print("<%d>"%res.status_code)
 
     if (res.status_code != 200) and (int(n) == i):
         req_url = head + "%02d"%i + " END" + tail
         print("[%02d]"%i + title)
         res = requests.get(req_url)
 
-    dl_file(res, "[%02d] "%i + title, ftype = "mp4")
+    dl_file(res, "[%02d] "%i + title, FTYPE)
 
-print("\nChecking OVA...")
+addition = re.findall("([a-zA-Z]+);", more)
 
-print("[OVA]" + title, end = ' ', flush = True)
-req_url = head + "OVA" + tail
-res = requests.get(req_url)
-print(res.status_code)
+for i in addition:
+    print("\n[Checking %s]\n"%i)
 
-if res.status_code == 200:
-    dl_file(res, "[OVA] " + title, ftype = "mp4")
-
-i = 1
-while True:
-    print("[OVA %d] "%i + title, end = ' ', flush = True)
-    req_url = head + "OVA%d"%i + tail
+    print("[%s]"%i + title, end = ' ', flush = True)
+    req_url = head + i + tail
     res = requests.get(req_url)
-    print(res.status_code)
+    print("<%d>\n"%res.status_code)
 
-    i += 1
+    if res.status_code == 200:
+        dl_file(res, "[%s] "%i + title, FTYPE)
+        continue
 
-    if res.status_code != 200:
-        break
+    j = 1
+    while True:
+        print("[%s %d] "%(i, j) + title, end = ' ', flush = True)
+        req_url = head + "%s%d"%(i, j) + tail
+        res = requests.get(req_url)
+        print("<%d>"%res.status_code)
+
+        if res.status_code != 200:
+            break
+        else:
+            dl_file(res, "[%s %d] "%(i, j) + title, FTYPE)
+
+        j += 1
 
 print("\nDone!")
