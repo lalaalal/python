@@ -59,7 +59,7 @@ addition = re.findall("([a-zA-Z]+);", more)
 for i in addition:
     print("\n[Checking %s]\n"%i)
 
-    print("[%s]"%i + title, end = ' ', flush = True)
+    print("[%s] "%i + title, end = ' ', flush = True)
     req_url = head + i + tail
     res = requests.get(req_url)
     print("<%d>\n"%res.status_code)
