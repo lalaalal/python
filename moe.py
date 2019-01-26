@@ -49,8 +49,9 @@ for i in range(int(m), int(n) + 1):
 
     if (res.status_code != 200) and (int(n) == i):
         req_url = head + "%02d"%i + " END" + tail
-        print("[%02d]"%i + title)
+        print("[%02d] "%i + title, end = ' ', flush = True)
         res = requests.get(req_url)
+	print("<%d>"%res.status_code)
 
     dl_file(res, "[%02d] "%i + title, FTYPE)
 
