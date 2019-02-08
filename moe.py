@@ -20,8 +20,7 @@ def mkdir(dname):
 
 path    = input("PATH   : ")
 title   = input("Title  : ")
-head    = input("Head   : ")
-tail    = input("Tail   : ")
+url     = input("Url    : ")
 m       = input("First  : ")
 n       = input("Last   : ")
 more    = input("More   : ")
@@ -30,25 +29,22 @@ option  = input("Option : ")
 if path == "":
     path = "/home/lalaalal/Videos"
 
-if tail == "":
-    tail = ".moe"
-
 mkdir(path + '/' + title)
 os.chdir(path + '/' + title)
 
 print("\n[Start Downloading]\n")
 for i in range(int(m), int(n) + 1):
     if option.find("z") == 0:
-        req_url = head + i + tail
+        req_url = url%"%02d"%i
     else:
-        req_url = head + "%02d"%i + tail
+        req_url = url%"%d"%i
 
     print("[%02d] "%i + title, end = ' ', flush = True)
     res = requests.get(req_url)
     print("<%d>"%res.status_code)
 
     if (res.status_code != 200) and (int(n) == i):
-        req_url = head + "%02d"%i + " END" + tail
+        req_url = url%"%d END"%i
         print("[%02d] "%i + title, end = ' ', flush = True)
         res = requests.get(req_url)
         print("<%d>"%res.status_code)
@@ -61,7 +57,7 @@ for i in addition:
     print("\n[Checking %s]\n"%i)
 
     print("[%s] "%i + title, end = ' ', flush = True)
-    req_url = head + i + tail
+    req_url = url%i
     res = requests.get(req_url)
     print("<%d>\n"%res.status_code)
 
@@ -72,7 +68,7 @@ for i in addition:
     j = 1
     while True:
         print("[%s %d] "%(i, j) + title, end = ' ', flush = True)
-        req_url = head + "%s%d"%(i, j) + tail
+        req_url = url%"%s%d"%(i, j)
         res = requests.get(req_url)
         print("<%d>"%res.status_code)
 
