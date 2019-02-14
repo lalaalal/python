@@ -1,6 +1,7 @@
 import requests
 import os
 import re
+from urllib import parse
 
 FTYPE = "mp4"
 
@@ -28,6 +29,8 @@ option  = input("Option : ")
 
 if path == "":
     path = "/home/lalaalal/Videos"
+
+url = parse.unquote(url)
 
 mkdir(path + '/' + title)
 os.chdir(path + '/' + title)
