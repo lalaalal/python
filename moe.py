@@ -42,6 +42,8 @@ for i in range(int(m), int(n) + 1):
     else:
         req_url = url%"%d"%i
 
+    if option.find("v") == 0:
+        print("%s"%req_url)
     print("[%02d] "%i + title, end = ' ', flush = True)
     res = requests.get(req_url)
     print("<%d>"%res.status_code)
@@ -54,11 +56,13 @@ for i in range(int(m), int(n) + 1):
 
     dl_file(res, "[%02d] "%i + title, FTYPE)
 
-addition = re.findall("([a-zA-Z]+);", more)
+addition = re.findall("([a-zA-Z ]+);", more)
 
 for i in addition:
     print("\n[Checking %s]\n"%i)
 
+    if option.find("v") == 0:
+        print("%s"%req_url)
     print("[%s] "%i + title, end = ' ', flush = True)
     req_url = url%i
     res = requests.get(req_url)
@@ -70,6 +74,8 @@ for i in addition:
 
     j = 1
     while True:
+        if option.find("v") == 0:
+            print("%s"%req_url)
         print("[%s %d] "%(i, j) + title, end = ' ', flush = True)
         req_url = url%"%s%d"%(i, j)
         res = requests.get(req_url)
