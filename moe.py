@@ -28,7 +28,7 @@ more    = input("More   : ")
 option  = input("Option : ")
 
 if path == "":
-    path = "/home/lalaalal/Videos"
+    path = "/tmp"
 
 url = parse.unquote(url)
 
