@@ -6,7 +6,7 @@ import matplotlib
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-fig = plt.figure(figsize=(10, 10))
+fig = plt.figure()
 ax = fig.gca(projection='3d')
 
 X_REAL = np.arange(-5, 5, 0.1)
@@ -35,8 +35,12 @@ norm = matplotlib.colors.Normalize(minn, maxx)
 m = plt.cm.ScalarMappable(norm=norm, cmap='jet')
 fcolors = m.to_rgba(Y_IMAG)
 m.set_array(Y_IMAG)
-fig.colorbar(m)
+fig.colorbar(m).set_label("Y-IMAG")
 
 surf = ax.plot_surface(X_REAL, Y_REAL, X_IMAG, facecolors=fcolors,
-                       vmin=minn, vmax=maxx, shade=False)
+                       vmin=minn, vmax=maxx, shade=False, linewidth=0)
+ax.set_xlabel("X-REAL")
+ax.set_ylabel("Y-REAL")
+ax.set_zlabel("X-IMAG")
+
 plt.show()
