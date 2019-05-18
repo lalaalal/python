@@ -1,3 +1,6 @@
+# by 협창쓰
+# date 2019.05.05
+
 import numpy as np
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -33,25 +36,3 @@ ax.set_ylim(-3, 3)
 ax.set_zlim(-3, 3)
 plt.title(label="y = (%.2f)^x" % a)
 plt.show()
-
-# plt.figure(figsize=(10, 7))
-#
-# plt.subplot(121)
-# x = xrange(-3, 3, 0.005)
-# y = []
-# for i in x:
-#     y.append(0)
-#
-# plt.scatter(x, y, s=50, c=x)
-#
-# plt.subplot(122)
-# y = []
-# for t in x:
-#     y.append(((-1.5) ** t).real)
-#
-# z = []
-# for t in x:
-#     z.append(((-1.5) ** t).imag)
-#
-# plt.scatter(y, z, s=50, c=x)
-# plt.show()

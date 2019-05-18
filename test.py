@@ -1,4 +1,4 @@
-# by lalaalal
+# by 협창쓰
 # date 2019.05.05
 
 import numpy as np
